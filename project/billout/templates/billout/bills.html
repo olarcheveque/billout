@@ -1,0 +1,20 @@
+{% extends "skin/layout.html" %}
+
+{% load i18n %}
+
+{% block main %}
+<div class="box">
+    <h1 class="box-handle">{% trans "Bills" %}</h1>
+    <div class="details">
+        <ul>
+        {% for bill in bills %}
+            <li>
+                <a href="{% url bill bill.id %}">#{{ bill.id}}</a>
+                {{ bill.date }}
+                {{ bill.total_with_taxes }}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock main %}

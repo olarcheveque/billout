@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<div id="header">
+    <p class="logo">BILLOUT</p>
+    <p class="slogan"><span class="quote">&#8220;</span>{% trans "Fit bills with real time" %}<span class="quote">&#8221;</span></p>
+</div>
+
+<div class="visualClear"></div>
+
+{% if request.user.is_authenticated %}
+    <a href="{% url bills %}">{% trans "My bills" %}</a>
+    <a href="{% url logout %}">{% trans "Logout" %}</a>
+{% endif %}

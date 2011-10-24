@@ -103,7 +103,7 @@ INSTALLED_APPS = (
     'staticfiles',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'billing',
+    'billout',
 )
 
 SOUTH_TESTS_MIGRATE = False
