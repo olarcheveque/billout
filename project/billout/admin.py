@@ -18,7 +18,8 @@ class RateAdmin(admin.ModelAdmin):
     pass
 
 class BillAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date', 'customer', '_total_without_taxes', '_total_tps', '_total_tvq', '_total_with_taxes' )
+    list_editable = ('payed', )
+    list_display = ('id', 'date', 'customer', '_total_without_taxes', '_total_tps', '_total_tvq', '_total_with_taxes', 'payed', )
     list_filter = ('customer', )
     inlines = (ItemInline, )
 

@@ -6,15 +6,22 @@
 <div class="box">
     <h1 class="box-handle">{% trans "Bills" %}</h1>
     <div class="details">
-        <ul>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Total ($)" %}</th>
+                <th>{% trans "Payed?" %}</th>
+            </tr>
         {% for bill in bills %}
-            <li>
-                <a href="{% url bill bill.id %}">#{{ bill.id}}</a>
-                {{ bill.date }}
-                {{ bill.total_with_taxes }}
-            </li>
+            <tr>
+                <td><a href="{% url bill bill.id %}">{{ bill.id}}</a></td>
+                <td>{{ bill.date }}</td>
+                <td class="number">{{ bill.total_with_taxes }}$</td>
+                <td class="number">{% if bill.payed %}✓{% endif %}</td>
+            </tr>
         {% endfor %}
-        </ul>
+        </table>
     </div>
 </div>
 {% endblock main %}

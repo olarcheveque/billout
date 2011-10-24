@@ -78,6 +78,7 @@ class Item(models.Model):
 class Bill(models.Model):
     date = models.DateField(auto_now_add=True, verbose_name=_('Date'))
     customer = models.ForeignKey('auth.User', verbose_name=_('Customer'))
+    payed = models.BooleanField(verbose_name=_('Payed'), default=False)
 
     class Meta:
         verbose_name = _('Bill')
