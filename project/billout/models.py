@@ -29,7 +29,7 @@ class Activity(models.Model):
     objects = ActivityManager()
     customer = models.ForeignKey('auth.User', verbose_name=_('Customer'))
     date = models.DateField(verbose_name=_('Date'))
-    project = models.ForeignKey('Project', verbose_name=_('Project'), null=True)
+    project = models.ForeignKey('Project', verbose_name=_('Project'), blank=True, null=True)
     hours = models.FloatField(verbose_name=_('Hours'))
     comment = models.CharField(max_length=255, verbose_name=_('Comment'))
 
@@ -115,7 +115,8 @@ class Bill(models.Model):
         return self.total_without_taxes() + self.total_tps() + self.total_tvq()
 
     def mail(self):
-        subject = u"%s #%s %s" % (_("Bill"), self.id,  _("sent"))
+        company = getattr(settings, 'BILLOUT_COMPANY_NAME', 'BILLOUT')
+        subject = u"%s : Facture / Bill #%s" % (company, self.id, )
         sender = getattr(settings, 'BILLOUT_SENDER_EMAIL', 'noreply@billout')
         message = render_to_string('billout/mail.html', { 'bill' : self })
         email = self.customer.email

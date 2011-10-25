@@ -28,7 +28,7 @@
         </tr>
     {% for item in bill.item_set.all %}
         <tr>
-            <td>{{ item.activity.project }}</td>
+            <td>{{ item.activity.project|default:"-" }}</td>
             <td>{{ item.activity.date }}</td>
             <td class="number">{{ item.activity.hours }}</td>
             <td>{{ item.activity.comment }}</td>
