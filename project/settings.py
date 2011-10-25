@@ -22,6 +22,8 @@ TIME_ZONE = 'America/Chicago'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
+DATE_FORMAT = 'Y-m-d'
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -30,7 +32,7 @@ USE_I18N = True
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
-USE_L10N = True
+USE_L10N = False
 
 # for static media aggregation
 STATICFILES_FINDERS = (

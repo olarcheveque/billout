@@ -2,6 +2,12 @@
 
 {% load i18n %}
 
+{% block extrahead %}
+<style>
+	td, th {max-width: 20em;}
+</style>
+{% endblock extrahead %}
+
 {% block menu %}
     {% include "billout/menu.html" %}
 {% endblock menu %}
