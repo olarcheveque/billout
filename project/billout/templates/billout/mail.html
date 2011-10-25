@@ -1,0 +1,39 @@
+{% load i18n %}
+
+Compte client : {{ bill.customer.username }}
+Numéro de facture : #{{ bill.id }}
+
+Cher client,
+
+Vous trouverez votre facture à cette adresse : 
+
+https://billout.usinasite.com/bill/{{ bill.id }} 
+
+N'hésitez pas à communiquer avec nous pour toutes informations supplémentaires via courrier électronique à: olivier.larcheveque@gmail.com
+
+
+Vous pouvez retrouver vos anciennes factures ici :
+
+https://billout.usinasite.com
+
+Merci.
+
+=================================================================
+
+Customer account : {{ bill.customer.username }}
+Bill number : #{{ bill.id }}
+
+Dear customer,
+
+You can find your bill here : 
+
+https://billout.usinasite.com/bill/{{ bill.id }} 
+
+If you have any questions, please send us an email to : olivier.larcheveque@gmail.com
+
+
+You cant find your past bills here :
+
+https://billout.usinasite.com
+
+Thank you.
