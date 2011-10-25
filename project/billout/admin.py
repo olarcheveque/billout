@@ -14,7 +14,6 @@ class ItemInlineFormset(BaseInlineFormSet):
             activities_linked_to_item.remove(selected)
         qs = Activity.objects.exclude(id__in=activities_linked_to_item)
         form.fields['activity'].queryset = qs
-        print selected
 
 class ItemInline(admin.TabularInline):
     model = Item
