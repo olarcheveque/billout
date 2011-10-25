@@ -7,14 +7,14 @@ from django.template import Context, RequestContext
 from django.utils.translation import ugettext as _
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.conf import settings
-from models import Bill
+from models import Bill, BILL_PUBLISHED
 
 @login_required
 def bills(request, ):
     if request.user.is_superuser:
         bills = Bill.objects.all()
     else:
-        bills = Bill.objects.filter(customer=request.user)
+        bills = Bill.objects.filter(customer=request.user, state=BILL_PUBLISHED)
 
     c = {
         'bills' : bills.order_by('-date', '-id'), 

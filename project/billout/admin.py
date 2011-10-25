@@ -46,8 +46,8 @@ def mail_bill(modeladmin, request, queryset):
 
 
 class BillAdmin(admin.ModelAdmin):
-    list_editable = ('payed', )
-    list_display = ('id', 'date', 'customer', '_total_without_taxes', '_total_tps', '_total_tvq', '_total_with_taxes', 'payed', )
+    list_editable = ('state', 'payed', )
+    list_display = ('id', 'date', 'customer', '_total_without_taxes', '_total_tps', '_total_tvq', '_total_with_taxes', 'state', 'payed', )
     list_filter = ('customer', )
     actions = [mail_bill, ]
     inlines = (ItemInline, )
