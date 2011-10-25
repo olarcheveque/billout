@@ -7,7 +7,7 @@
 {% endblock menu %}
 
 {% block main %}
-<h1>{{ bill.customer }} {% trans "bill" %} #{{ bill.id }}</h1>
+<h1>[{{ bill.customer.username.upper }}] {% trans "bill" %} #{{ bill.id }}</h1>
 <table class="rotated">
     <tr><th>{% trans "Date" %}<th><td>{{bill.date }}</td></tr>
     <tr><th>{% trans "#TPS" %}<th><td>{{ TPS_NUM }}</td></tr>
@@ -28,7 +28,7 @@
         </tr>
     {% for item in bill.item_set.all %}
         <tr>
-            <td>{{ item.activity.project|default:"-" }}</td>
+            <td>{{ item.activity.project.name|default:"-" }}</td>
             <td>{{ item.activity.date }}</td>
             <td class="number">{{ item.activity.hours }}</td>
             <td>{{ item.activity.comment }}</td>
