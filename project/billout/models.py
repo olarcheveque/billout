@@ -71,11 +71,17 @@ class Item(models.Model):
     def __unicode__(self):
         return self.activity.__unicode__()
 
-
+BILL_DRAFT = 'draft'
+BILL_PUBLISHED = 'published'
+BILL_STATE_CHOICES = (
+    (BILL_DRAFT, _("Draft")),
+    (BILL_PUBLISHED, _("Published")),
+)
 class Bill(models.Model):
     date = models.DateField(verbose_name=_('Date'))
     customer = models.ForeignKey('auth.User', verbose_name=_('Customer'))
     payed = models.BooleanField(verbose_name=_('Payed'), default=False)
+    state = models.CharField(max_length=10, verbose_name=_('State'), choices=BILL_STATE_CHOICES)
 
     class Meta:
         verbose_name = _('Bill')
