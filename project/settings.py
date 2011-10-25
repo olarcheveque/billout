@@ -88,7 +88,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 INSTALLED_APPS = (
-    'sentry.client',
+    'raven.contrib.django',
     'admin_tools',
     'admin_tools.theming',
     'admin_tools.menu',
@@ -109,4 +109,7 @@ INSTALLED_APPS = (
 SOUTH_TESTS_MIGRATE = False
 ADMIN_TOOLS_INDEX_DASHBOARD = 'project.dashboard.CustomIndexDashboard'
 
-SENTRY_REMOTE_URL = 'http://sentry.usinasite.com/store/'
+SENTRY_SERVERS = ['http://sentry.usinasite.com/store/', ]
+MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
+  'raven.contrib.django.middleware.Sentry404CatchMiddleware',
+)
