@@ -20,13 +20,7 @@ class Project(models.Model):
     def __unicode__(self):
         return u"[%s] %s" % (self.customer, self.name)
 
-class ActivityManager(models.Manager):
-    def get_query_set(self):
-        activities_linked_to_item = [i.activity.id for i in Item.objects.all()]
-        return super(ActivityManager, self).get_query_set().exclude(id__in=activities_linked_to_item)
-
 class Activity(models.Model):
-    objects = ActivityManager()
     customer = models.ForeignKey('auth.User', verbose_name=_('Customer'))
     date = models.DateField(verbose_name=_('Date'))
     project = models.ForeignKey('Project', verbose_name=_('Project'), blank=True, null=True)
@@ -34,7 +28,7 @@ class Activity(models.Model):
     comment = models.CharField(max_length=255, verbose_name=_('Comment'))
 
     class Meta:
-        ordering = ['-date']
+        ordering = ['-date', ]
         verbose_name = _('Activity')
         verbose_name_plural = _('Activities')
 
@@ -89,6 +83,13 @@ class Bill(models.Model):
 
     def __unicode__(self):
         return "#%s %s (%s)" % (self.id, self.customer, self.date)
+
+    def total_worked_hours(self):
+        total = 0
+        items = Item.objects.filter(bill=self)
+        for i in items:
+            total += i.activity.hours
+        return round(total, 2)
 
     def total_without_taxes(self):
         total = 0

@@ -42,6 +42,10 @@
 <div class="box visualClear">
     <table>
         <tr>
+            <th>{% trans "Total worked hours" %}</th>
+            <td class="number">{{ bill.total_worked_hours }}H</td>
+        </tr>
+        <tr>
             <th>{% trans "Total" %}</th>
             <td class="number">{{ bill.total_without_taxes }}$</td>
         </tr>
