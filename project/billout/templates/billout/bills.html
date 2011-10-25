@@ -7,6 +7,8 @@
 {% endblock menu %}
 
 {% block main %}
+<h1>{% trans "Balance" %} : {{ balance }}$</h1>
+
 <h1>{% trans "Bills" %}</h1>
 <div class="box">
     <table>
@@ -26,6 +28,13 @@
             <td class="number">{% if bill.payed %}✓{% endif %}</td>
         </tr>
     {% endfor %}
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <th>{{ balance }}$</th>
+        <th>{% trans "Amount due" %}</th
+     </tr>
     </table>
 </div>
 {% endblock main %}

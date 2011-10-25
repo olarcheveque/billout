@@ -11,12 +11,17 @@ from models import Bill, BILL_PUBLISHED
 
 @login_required
 def bills(request, ):
+    balance = 0
+    for bill in Bill.objects.filter(customer=request.user, state=BILL_PUBLISHED, payed=False):
+        balance += bill.total_with_taxes()
+
     if request.user.is_superuser:
         bills = Bill.objects.all()
     else:
         bills = Bill.objects.filter(customer=request.user, state=BILL_PUBLISHED)
 
     c = {
+        'balance' : balance,
         'bills' : bills.order_by('-date', '-id'), 
     }
     return render_to_response("billout/bills.html", \
