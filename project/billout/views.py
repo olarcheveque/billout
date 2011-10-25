@@ -12,13 +12,15 @@ from models import Bill, BILL_PUBLISHED
 @login_required
 def bills(request, ):
     balance = 0
-    for bill in Bill.objects.filter(customer=request.user, state=BILL_PUBLISHED, payed=False):
-        balance += bill.total_with_taxes()
 
     if request.user.is_superuser:
         bills = Bill.objects.all()
+    	for bill in Bill.objects.filter(state=BILL_PUBLISHED, payed=False):
+            balance += bill.total_with_taxes()
     else:
         bills = Bill.objects.filter(customer=request.user, state=BILL_PUBLISHED)
+    	for bill in Bill.objects.filter(customer=request.user, state=BILL_PUBLISHED, payed=False):
+            balance += bill.total_with_taxes()
 
     c = {
         'balance' : balance,
