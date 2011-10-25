@@ -64,6 +64,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'project.middleware.SecureRequiredMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -113,4 +114,10 @@ ADMIN_TOOLS_INDEX_DASHBOARD = 'project.dashboard.CustomIndexDashboard'
 SENTRY_SERVERS = ['http://sentry.usinasite.com/store/', ]
 MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
   'raven.contrib.django.middleware.Sentry404CatchMiddleware',
+)
+
+SECURE_REQUIRED_PATHS = (
+    '/admin/',
+    '/accounts/',
+    '/login/',
 )
