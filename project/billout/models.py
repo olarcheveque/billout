@@ -92,14 +92,14 @@ class Bill(models.Model):
         items = Item.objects.filter(bill=self)
         for i in items:
             total += i.activity.hours * i.rate
-        return total
+        return round(total, 2)
 
     def total_tps(self):
         total = 0
         items = [i for i in Item.objects.filter(bill=self) if i.tps]
         for i in items:
             total += i.activity.hours * i.rate * settings.TPS_RATE
-        return total
+        return round(total, 2)
 
     def total_tvq(self):
         total = 0
@@ -107,7 +107,7 @@ class Bill(models.Model):
         for i in items:
             base = i.activity.hours * i.rate
             total +=  (base + base * settings.TPS_RATE) * settings.TVQ_RATE
-        return total
+        return round(total, 2)
 
     def total_with_taxes(self):
         return self.total_without_taxes() + self.total_tps() + self.total_tvq()

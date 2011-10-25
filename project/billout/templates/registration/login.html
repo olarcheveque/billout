@@ -4,7 +4,8 @@
 {% block main %}
 
 {% if form.errors %}
-<p>{% trans "Your username and password didn't match. Please try again." %}</p>
+    <p class="messages">{% trans "Your username and password didn't match. Please try again." %}</p>
+    <div class="visualClear"></div>
 {% endif %}
 
 <form method="post" action="{% url django.contrib.auth.views.login %}">

@@ -1,0 +1,7 @@
+{% load i18n %}
+
+{% if request.user.is_authenticated %}
+    <span>{{ request.user }} : </span>
+    <a href="{% url bills %}">{% trans "My bills" %}</a>
+    <a href="{% url logout %}">{% trans "Logout" %}</a>
+{% endif %}

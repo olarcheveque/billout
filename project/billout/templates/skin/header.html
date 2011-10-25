@@ -6,8 +6,3 @@
 </div>
 
 <div class="visualClear"></div>
-
-{% if request.user.is_authenticated %}
-    <a href="{% url bills %}">{% trans "My bills" %}</a>
-    <a href="{% url logout %}">{% trans "Logout" %}</a>
-{% endif %}

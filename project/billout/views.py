@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.template import Context, RequestContext
+from django.utils.translation import ugettext as _
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.conf import settings
 from models import Bill
@@ -16,7 +17,7 @@ def bills(request, ):
         bills = Bill.objects.filter(customer=request.user)
 
     c = {
-        'bills' : bills.order_by('date'), 
+        'bills' : bills.order_by('-date', '-id'), 
     }
     return render_to_response("billout/bills.html", \
                                Context(c), \
@@ -25,7 +26,7 @@ def bills(request, ):
 @login_required
 def bill(request, id):
     bill = get_object_or_404(Bill, id=id)
-    if request.user != bill.customer:
+    if request.user != bill.customer and not request.user.is_superuser:
         messages.add_message(request, messages.ERROR, _("Don't try to spy please."))
         return redirect(reverse('bills'))
     
