@@ -34,6 +34,7 @@ class Activity(models.Model):
     comment = models.CharField(max_length=255, verbose_name=_('Comment'))
 
     class Meta:
+        ordering = ['-date']
         verbose_name = _('Activity')
         verbose_name_plural = _('Activities')
 
@@ -78,7 +79,7 @@ class Item(models.Model):
 
 
 class Bill(models.Model):
-    date = models.DateField(auto_now_add=True, verbose_name=_('Date'))
+    date = models.DateField(verbose_name=_('Date'))
     customer = models.ForeignKey('auth.User', verbose_name=_('Customer'))
     payed = models.BooleanField(verbose_name=_('Payed'), default=False)
 
