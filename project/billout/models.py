@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 
+from django.core.mail import send_mail
 from django.utils.translation import ugettext as _
+from django.template.loader import render_to_string
 from django.conf import settings
 from django.db import models
 
@@ -92,14 +94,14 @@ class Bill(models.Model):
         items = Item.objects.filter(bill=self)
         for i in items:
             total += i.activity.hours * i.rate
-        return total
+        return round(total, 2)
 
     def total_tps(self):
         total = 0
         items = [i for i in Item.objects.filter(bill=self) if i.tps]
         for i in items:
             total += i.activity.hours * i.rate * settings.TPS_RATE
-        return total
+        return round(total, 2)
 
     def total_tvq(self):
         total = 0
@@ -107,7 +109,18 @@ class Bill(models.Model):
         for i in items:
             base = i.activity.hours * i.rate
             total +=  (base + base * settings.TPS_RATE) * settings.TVQ_RATE
-        return total
+        return round(total, 2)
 
     def total_with_taxes(self):
         return self.total_without_taxes() + self.total_tps() + self.total_tvq()
+
+    def mail(self):
+        subject = u"%s #%s %s" % (_("Bill"), self.id,  _("sent"))
+        sender = getattr(settings, 'BILLOUT_SENDER_EMAIL', 'noreply@billout')
+        message = render_to_string('billout/mail.html', { 'bill' : self })
+        email = self.customer.email
+        if email in (None, ''):
+            raise Exception(_("No email set for customer"))
+        copies =  getattr(settings, 'BILLOUT_EMAIL_COPIES', [])
+        to = [email,] + copies
+        send_mail(subject, message, sender, to, fail_silently=False)

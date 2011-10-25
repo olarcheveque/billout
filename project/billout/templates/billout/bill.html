@@ -2,59 +2,61 @@
 
 {% load i18n %}
 
+{% block menu %}
+    {% include "billout/menu.html" %}
+{% endblock menu %}
+
 {% block main %}
-<div class="box">
-    <h1>{{ bill.customer }} {% trans "bill" %} #{{ bill.id }}</h1>
-    <table id="identity">
-        <tr><th>{% trans "Date" %}<th><td>{{bill.date }}</td></tr>
-        <tr><th>{% trans "#TPS" %}<th><td>{{ TPS_NUM }}</td></tr>
-        <tr><th>{% trans "#TVQ" %}<th><td>{{ TVQ_NUM }}</td></tr>
-        <tr><th>{% trans "Pay by check to" %}<th><td>{{ PAY_TO }}</td></tr>
-        <tr><th>{% trans "Address" %}<th><td>{{ ADDRESS }}</td></tr>
+<h1>{{ bill.customer }} {% trans "bill" %} #{{ bill.id }}</h1>
+<table class="rotated">
+    <tr><th>{% trans "Date" %}<th><td>{{bill.date }}</td></tr>
+    <tr><th>{% trans "#TPS" %}<th><td>{{ TPS_NUM }}</td></tr>
+    <tr><th>{% trans "#TVQ" %}<th><td>{{ TVQ_NUM }}</td></tr>
+    <tr><th>{% trans "Pay by check to" %}<th><td>{{ PAY_TO }}</td></tr>
+    <tr><th>{% trans "Address" %}<th><td>{{ ADDRESS }}</td></tr>
+</table>
+<div class="box visualClear">
+    <table>
+        <tr>
+            <th class="column-header">{% trans "Project" %}</th>
+            <th class="column-header">{% trans "Date" %}</th>
+            <th class="column-header">{% trans "Hours (H)" %}</th>
+            <th class="column-header">{% trans "Comment" %}</th>
+            <th class="column-header">{% trans "Rate ($/H)" %}</th>
+            <th class="column-header">{% trans "TPS" %}</th>
+            <th class="column-header">{% trans "TVQ" %}</th>
+        </tr>
+    {% for item in bill.item_set.all %}
+        <tr>
+            <td>{{ item.activity.project }}</td>
+            <td>{{ item.activity.date }}</td>
+            <td class="number">{{ item.activity.hours }}</td>
+            <td>{{ item.activity.comment }}</td>
+            <td class="number">{{ item.rate }}</td>
+            <td class="number">{% if item.tps %}✓{% endif %}</td>
+            <td class="number">{% if item.tvq %}✓{% endif %}</td>
+        </tr>
+    {% endfor %}
     </table>
-    <div class="details visualClear">
-        <table>
-            <tr>
-                <th>{% trans "Project" %}</th>
-                <th>{% trans "Date" %}</th>
-                <th>{% trans "Hours (H)" %}</th>
-                <th>{% trans "Comment" %}</th>
-                <th>{% trans "Rate ($/H)" %}</th>
-                <th>{% trans "TPS" %}</th>
-                <th>{% trans "TVQ" %}</th>
-            </tr>
-        {% for item in bill.item_set.all %}
-            <tr>
-                <td>{{ item.activity.project }}</td>
-                <td>{{ item.activity.date }}</td>
-                <td class="number">{{ item.activity.hours }}</td>
-                <td>{{ item.activity.comment }}</td>
-                <td class="number">{{ item.rate }}</td>
-                <td class="number">{% if item.tps %}✓{% endif %}</td>
-                <td class="number">{% if item.tvq %}✓{% endif %}</td>
-            </tr>
-        {% endfor %}
-        </table>
-    </div>
-    <div class="details visualClear">
-        <table>
-            <tr>
-                <th>{% trans "Total" %}</th>
-                <td class="number">{{ bill.total_without_taxes }}$</td>
-            </tr>
-            <tr>
-                <th>{% trans "TPS" %}</th>
-                <td class="number">{{ bill.total_tps }}$</td>
-            </tr>
-            <tr>
-                <th>{% trans "TVQ" %}</th>
-                <td class="number">{{ bill.total_tvq }}$</td>
-            </tr>
-            <tr>
-                <th>{% trans "Total taxes included" %}</th>
-                <td class="number">{{ bill.total_with_taxes }}$</td>
-            </tr>
-        </table>
-    </div>
+</div>
+<div class="box visualClear">
+    <table>
+        <tr>
+            <th>{% trans "Total" %}</th>
+            <td class="number">{{ bill.total_without_taxes }}$</td>
+        </tr>
+        <tr>
+            <th>{% trans "TPS" %}</th>
+            <td class="number">{{ bill.total_tps }}$</td>
+        </tr>
+        <tr>
+            <th>{% trans "TVQ" %}</th>
+            <td class="number">{{ bill.total_tvq }}$</td>
+        </tr>
+        <tr>
+            <th>{% trans "Total taxes included" %}</th>
+            <td class="number">{{ bill.total_with_taxes }}$</td>
+        </tr>
+    </table>
 </div>
 {% endblock main %}

@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 from django.utils.translation import ugettext as _
-from django.contrib import admin
+from django.contrib import admin, messages
 from models import *
 
 class ItemInline(admin.TabularInline):
@@ -17,10 +17,20 @@ class ActivityAdmin(admin.ModelAdmin):
 class RateAdmin(admin.ModelAdmin):
     pass
 
+def mail_bill(modeladmin, request, queryset):
+    selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+    for bill in Bill.objects.filter(id__in=selected):
+        try:
+            bill.mail()
+            messages.add_message(request, messages.SUCCESS, _("Bill sent"))
+        except Exception, e:
+            messages.add_message(request, messages.ERROR, e)
+            
 class BillAdmin(admin.ModelAdmin):
     list_editable = ('payed', )
     list_display = ('id', 'date', 'customer', '_total_without_taxes', '_total_tps', '_total_tvq', '_total_with_taxes', 'payed', )
     list_filter = ('customer', )
+    actions = [mail_bill, ]
     inlines = (ItemInline, )
 
     def _total_without_taxes(self, obj):
