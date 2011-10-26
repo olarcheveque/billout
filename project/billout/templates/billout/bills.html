@@ -2,14 +2,35 @@
 
 {% load i18n %}
 
+{% block extrahead %}
+<style>
+.customers {
+    float: right;background-color: transparent;
+    border: medium none;
+    color: #FFFFFF;
+    float: right;
+    font-size: 0.8em;
+}
+</style>
+{% endblock extrahead %}
+
+
 {% block menu %}
     {% include "billout/menu.html" %}
+    {% block extramenu %}
+    <select class="customers" onchange="window.location.href=this.options[this.selectedIndex].value">
+        <option value="#">{% trans "Change customer" %}</option>
+        {% for customer in customers %}
+        <option value="{% url bills customer.username %}">{{ customer.username }}</option>
+        {% endfor %}
+    </select>
+    {% endblock extramenu %}
 {% endblock menu %}
 
-{% block main %}
-<h1>{% trans "Balance" %} : {{ balance }}$</h1>
 
-<h1>{% trans "Bills" %}</h1>
+
+{% block main %}
+<h1>{{customer.username.title }} {% trans "Bills" %}</h1>
 <div class="box">
     <table>
         <tr>
@@ -37,4 +58,5 @@
      </tr>
     </table>
 </div>
+
 {% endblock main %}

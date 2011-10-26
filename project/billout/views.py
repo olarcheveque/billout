@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 
 from django.core.urlresolvers import reverse
+from django.db.models import Q
+from django.contrib.auth.models import User as Customer
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.template import Context, RequestContext
@@ -10,19 +12,31 @@ from django.conf import settings
 from models import Bill, BILL_PUBLISHED
 
 @login_required
-def bills(request, ):
+def bills(request, username=None):
     balance = 0
 
-    if request.user.is_superuser:
-        bills = Bill.objects.all()
-    	for bill in Bill.objects.filter(state=BILL_PUBLISHED, payed=False):
-            balance += bill.total_with_taxes()
-    else:
-        bills = Bill.objects.filter(customer=request.user, state=BILL_PUBLISHED)
-    	for bill in Bill.objects.filter(customer=request.user, state=BILL_PUBLISHED, payed=False):
-            balance += bill.total_with_taxes()
+    if request.user.is_superuser and username is not None:
+        customer = Customer.objects.get(username=username)
+        customers = Customer.objects.all()
+        q = Q(state=BILL_PUBLISHED) & Q(customer=customer)
 
+    if request.user.is_superuser and username is None:
+        customer = None
+        customers = Customer.objects.all()
+        q = Q(state=BILL_PUBLISHED)
+
+    if request.user.is_superuser is None:
+        customer = request.user
+        customers = Customer.objects.none()
+        q = Q(state=BILL_PUBLISHED) & Q(customer=customer)
+
+    bills = Bill.objects.filter(q)
+    for bill in Bill.objects.filter(q & Q(payed=False)):
+        balance += bill.total_with_taxes()
+        
     c = {
+        'customers' : customers,
+        'customer' : customer,
         'balance' : balance,
         'bills' : bills.order_by('-date', '-id'), 
     }

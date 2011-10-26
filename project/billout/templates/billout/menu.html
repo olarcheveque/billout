@@ -4,4 +4,6 @@
     <span>{{ request.user }} : </span>
     <a href="{% url bills %}">{% trans "My bills" %}</a>
     <a href="{% url logout %}">{% trans "Logout" %}</a>
+    {% block extramenu %}
+    {% endblock extramenu %}
 {% endif %}
