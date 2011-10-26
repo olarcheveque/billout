@@ -25,7 +25,7 @@ def bills(request, username=None):
         customers = Customer.objects.all()
         q = Q(state=BILL_PUBLISHED)
 
-    if request.user.is_superuser is None:
+    if request.user.is_superuser is False:
         customer = request.user
         customers = Customer.objects.none()
         q = Q(state=BILL_PUBLISHED) & Q(customer=customer)
