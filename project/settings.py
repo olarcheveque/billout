@@ -107,6 +107,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'billout',
+    'usinskin',
     'django_vu.client',
 )
 
@@ -123,3 +124,5 @@ SECURE_REQUIRED_PATHS = (
     '/accounts/',
     '/login/',
 )
+
+LOGIN_REDIRECT_URL = '/'

@@ -47,10 +47,14 @@ def mail_bill(modeladmin, request, queryset):
 
 class BillAdmin(admin.ModelAdmin):
     list_editable = ('state', 'payed', )
-    list_display = ('id', 'date', 'customer', '_total_without_taxes', '_total_tps', '_total_tvq', '_total_with_taxes', 'state', 'payed', )
-    list_filter = ('customer', )
+    list_display = ('id', 'date', 'customer', 'total_worked_hours', '_total_without_taxes', '_total_tps', '_total_tvq', '_total_with_taxes', 'state', 'payed', )
+    list_filter = ('customer', 'date', )
     actions = [mail_bill, ]
     inlines = (ItemInline, )
+
+    def _total_worked_hours(self, obj):
+        return obj.total_worked_hours()
+    _total_worked_hours.short_description = _('Total worked hours')
 
     def _total_without_taxes(self, obj):
         return obj.total_without_taxes()
