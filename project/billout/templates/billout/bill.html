@@ -18,8 +18,8 @@
     <tr><th>{% trans "Date" %}<th><td>{{bill.date }}</td></tr>
     <tr><th>{% trans "#TPS" %}<th><td>{{ TPS_NUM }}</td></tr>
     <tr><th>{% trans "#TVQ" %}<th><td>{{ TVQ_NUM }}</td></tr>
-    <tr><th>{% trans "Pay by check to" %}<th><td>{{ PAY_TO }}</td></tr>
-    <tr><th>{% trans "Address" %}<th><td>{{ ADDRESS }}</td></tr>
+    <tr><th>{% trans "Payment infos" %}<th><td>{{ PAY_INFO|linebreaks }}</td></tr>
+    <tr><th>{% trans "Address" %}<th><td>{{ ADDRESS|linebreaks }}</td></tr>
 </table>
 <div class="box visualClear">
     <table>

@@ -72,7 +72,17 @@ class BillAdmin(admin.ModelAdmin):
         return obj.total_with_taxes()
     _total_with_taxes.short_description = _('Total with taxes')
 
+
+class SettingAdmin(admin.ModelAdmin):
+    list_display = ('key', 'name', 'value', )
+    fields = ('key', 'name', 'value', )
+
+class TaxAdmin(admin.ModelAdmin):
+    list_display = ('name', 'year', 'value', )
+
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(Bill, BillAdmin)
 admin.site.register(Rate, RateAdmin)
+admin.site.register(Setting, SettingAdmin)
+admin.site.register(Tax, TaxAdmin)

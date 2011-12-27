@@ -8,8 +8,7 @@ from django.contrib import messages
 from django.template import Context, RequestContext
 from django.utils.translation import ugettext as _
 from django.shortcuts import render_to_response, redirect, get_object_or_404
-from django.conf import settings
-from models import Bill, BILL_PUBLISHED
+from models import Bill, BILL_PUBLISHED, Setting
 
 @login_required
 def bills(request, username=None):
@@ -52,10 +51,10 @@ def bill(request, id):
         return redirect(reverse('bills'))
     
     c = {
-        'TPS_NUM' : settings.TPS_NUM,
-        'TVQ_NUM' : settings.TVQ_NUM,
-        'PAY_TO' : settings.PAY_TO,
-        'ADDRESS' : settings.ADDRESS,
+        'TPS_NUM' : Setting.objects.val("TPS_NUM"),
+        'TVQ_NUM' : Setting.objects.val("TVQ_NUM"),
+        'PAY_INFO' : Setting.objects.val("PAY_INFO"),
+        'ADDRESS' : Setting.objects.val("ADDRESS"),
         'bill' : bill,
     }
     return render_to_response("billout/bill.html", \
