@@ -55,6 +55,8 @@ def bill(request, id):
         'TVQ_NUM' : Setting.objects.val("TVQ_NUM"),
         'PAY_INFO' : Setting.objects.val("PAY_INFO"),
         'ADDRESS' : Setting.objects.val("ADDRESS"),
+        'tps_rate' : bill.get_tps_rate() * 100,
+        'tvq_rate' : bill.get_tvq_rate() * 100,
         'bill' : bill,
     }
     return render_to_response("billout/bill.html", \

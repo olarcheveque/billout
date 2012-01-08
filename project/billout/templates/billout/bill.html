@@ -56,11 +56,11 @@
             <td class="number">{{ bill.total_without_taxes }}$</td>
         </tr>
         <tr>
-            <th>{% trans "TPS" %}</th>
+            <th>{% trans "TPS" %} ({{ tps_rate }}%)</th>
             <td class="number">{{ bill.total_tps }}$</td>
         </tr>
         <tr>
-            <th>{% trans "TVQ" %}</th>
+            <th>{% trans "TVQ" %} ({{ tvq_rate }}%)</th>
             <td class="number">{{ bill.total_tvq }}$</td>
         </tr>
         <tr>
