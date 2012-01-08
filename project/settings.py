@@ -3,10 +3,6 @@
 from conf import *
 import os
 
-ADMINS = (
-#     ('Olivier Larchevêque', 'olivier.larcheveque@gmail.com'),
-)
-
 MANAGERS = ADMINS
 
 # Local time zone for this installation. Choices can be found here:
