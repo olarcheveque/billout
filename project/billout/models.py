@@ -182,3 +182,6 @@ class Tax(models.Model):
     class Meta:
         verbose_name = _('Tax')
         verbose_name_plural = _('Taxes')
+
+    def __unicode__(self):
+        return u"%s (%s) %s%%" % (self.name, self.year, self.value * 100, )
