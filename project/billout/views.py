@@ -10,10 +10,11 @@ from django.utils.translation import ugettext as _
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from models import Bill, BILL_PUBLISHED, Setting
 
-@login_required
-def bills(request, username=None):
-    balance = 0
 
+def _get_context_qs_vars(request, username=None):
+    """
+    Load bills for admin or customer
+    """
     if request.user.is_superuser and username is not None:
         customer = Customer.objects.get(username=username)
         customers = Customer.objects.all()
@@ -28,11 +29,49 @@ def bills(request, username=None):
         customer = request.user
         customers = Customer.objects.none()
         q = Q(state=BILL_PUBLISHED) & Q(customer=customer)
+    return customers, customer, q
 
+
+@login_required
+def reports(request, username=None):
+    customers, customer, q = _get_context_qs_vars(request, username)
     bills = Bill.objects.filter(q)
+
+    annual_reports = {}
+
+    for bill in bills:
+        if not annual_reports.has_key(bill.date.year):
+            annual_reports[bill.date.year] = {
+                'hours' : 0.0,
+                'tps' : 0.0,
+                'tvq' : 0.0,
+                'total_without_taxes' :  0.0,
+                'total_with_taxes' :  0.0,
+            }
+        annual_reports[bill.date.year]['hours'] += bill.total_worked_hours()
+        annual_reports[bill.date.year]['tps'] += bill.total_tps()
+        annual_reports[bill.date.year]['tvq'] += bill.total_tvq()
+        annual_reports[bill.date.year]['total_without_taxes'] += bill.total_without_taxes()
+        annual_reports[bill.date.year]['total_with_taxes'] += bill.total_with_taxes()
+
+    c = {
+        'annual_reports' : annual_reports,
+        'customers' : customers,
+        'customer' : customer,
+    }
+    return render_to_response("billout/reports.html", \
+                               Context(c), \
+                               context_instance = RequestContext(request))
+
+@login_required
+def bills(request, username=None):
+    customers, customer, q = _get_context_qs_vars(request, username)
+    bills = Bill.objects.filter(q)
+
+    balance = 0
     for bill in Bill.objects.filter(q & Q(payed=False)):
         balance += bill.total_with_taxes()
-        
+
     c = {
         'customers' : customers,
         'customer' : customer,

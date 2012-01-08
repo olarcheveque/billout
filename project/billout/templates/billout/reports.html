@@ -1,0 +1,59 @@
+{% extends "skin/layout.html" %}
+
+{% load i18n %}
+
+{% block extrahead %}
+<style>
+.customers {
+    float: right;background-color: transparent;
+    border: medium none;
+    color: #FFFFFF;
+    float: right;
+    font-size: 0.8em;
+}
+</style>
+{% endblock extrahead %}
+
+
+{% block menu %}
+    {% include "billout/menu.html" %}
+    {% block extramenu %}
+    {% if request.user.is_superuser %}
+    <select class="customers" onchange="window.location.href=this.options[this.selectedIndex].value">
+        <option value="#">{% trans "Change customer" %}</option>
+        {% for customer in customers %}
+        <option value="{% url reports customer.username %}">{{ customer.username }}</option>
+        {% endfor %}
+    </select>
+    {% endif %}
+    {% endblock extramenu %}
+{% endblock menu %}
+
+
+
+{% block main %}
+<h1>{{customer.username.title }} {% trans "Reports" %}</h1>
+<div class="box">
+    <table>
+        <tr>
+            <th class="column-header">{% trans "Year" %}</th>
+            <th class="column-header">{% trans "Total worked hours" %}</th>
+            <th class="column-header">{% trans "TPS" %}</th>
+            <th class="column-header">{% trans "TVQ" %}</th>
+            <th class="column-header">{% trans "Total without taxes" %}</th>
+            <th class="column-header">{% trans "Total with taxes" %}</th>
+        </tr>
+    {% for year, report in annual_reports.items %}
+        <tr>
+            <td>{{ year }}</td>
+            <td class="number">{{ report.hours }}</td>
+            <td class="number">{{ report.total_without_taxes }}$</td>
+            <td class="number">{{ report.tps }}$</td>
+            <td class="number">{{ report.tvq }}$</td>
+            <td class="number">{{ report.total_with_taxes }}$</td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+
+{% endblock main %}
