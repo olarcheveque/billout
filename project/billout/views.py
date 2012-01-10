@@ -35,7 +35,7 @@ def _get_context_qs_vars(request, username=None):
 @login_required
 def reports(request, username=None):
     customers, customer, q = _get_context_qs_vars(request, username)
-    bills = Bill.objects.filter(q)
+    bills = Bill.objects.filter(q).order_by('-date')
 
     annual_reports = {}
 
