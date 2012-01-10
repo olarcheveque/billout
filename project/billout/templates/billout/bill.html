@@ -32,7 +32,7 @@
             <th class="column-header">{% trans "TPS" %}</th>
             <th class="column-header">{% trans "TVQ" %}</th>
         </tr>
-    {% for item in bill.item_set.all %}
+    {% for item in items %}
         <tr>
             <td>{{ item.activity.project.name|default:"-" }}</td>
             <td>{{ item.activity.date }}</td>

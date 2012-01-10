@@ -97,6 +97,7 @@ def bill(request, id):
         'tps_rate' : bill.get_tps_rate() * 100,
         'tvq_rate' : bill.get_tvq_rate() * 100,
         'bill' : bill,
+        'items' : bill.items.all().order_by('activity__date'),
     }
     return render_to_response("billout/bill.html", \
                                Context(c), \

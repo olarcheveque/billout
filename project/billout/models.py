@@ -58,7 +58,7 @@ except:
     RATE_CHOICES = ()
 
 class Item(models.Model):
-    bill = models.ForeignKey('Bill', verbose_name=_('Bill'))
+    bill = models.ForeignKey('Bill', verbose_name=_('Bill'), related_name='items')
     activity = models.ForeignKey('Activity', verbose_name=_('Activity'), null=True)
     rate = models.FloatField(verbose_name=_('Rate'), choices=RATE_CHOICES)
     tps = models.BooleanField(verbose_name=_('TPS'), default=True)
