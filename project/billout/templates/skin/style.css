@@ -57,7 +57,8 @@ table {
 
 /* html */
 body { background-color:#eee; font-family: "Avant Garde", "Century Gothic"; padding: 2em;}
-h1 { background-color:#eee; font-weight: bold; font-size: 120%; margin: 2em 0 1em 0;}
+h1 { font-weight: bold; font-size: 120%; margin: 2em 0 1em 0;}
+h2 { font-weight: bold; font-size: 100%; }
 a {text-decoration: none; color: #B18904;}
 form {float: left; display: block; }
 
@@ -71,17 +72,18 @@ input[type="submit"] {border: 1px solid #ffffff; background: #eeeeee; color: #B1
 /* classes */
 .quote {font-size: 200%; font-weight: bold;}
 .messages { margin: 1em 0; padding: 0.8em 1em; border-radius: 6px; background: #ffffff; box-shadow: 3px 3px 4px #000; float: left;}
-form, .box { margin: 1em 0; padding: 0.8em 1em; border: 6px solid #FFFFFF; background: #dddddd; float: left;}
+form, .box { margin: 0.6em 0; padding: 0.8em 1em; border: 6px solid #FFFFFF; background: #dddddd; float: left;}
+.inline { float: left; margin-right: 1em;}
 .visualClear {clear: both; display: block;}
 
 /* ids */
-#header p.logo {font-weight: bold; letter-spacing: -0.1em; font-size: 4em; margin-left: -0.06em;}
+#header p.logo {color: #000000; font-weight: bold; letter-spacing: -0.1em; font-size: 4em; margin-left: -0.06em;}
 #header p.slogan {padding: 1em 0 0 1.6em;}
 #header p {float: left;}
 
 #footer .author {padding-top: 1em; font-size: 0.8em;}
 
-#menu {background-color: #B18904; padding: 0.2em; 1em; margin: 0.1em 0 1em;}
+#menu {background-color: #B18904; padding: 0.4em; 1em; margin: 0.4em 0 1em;}
 #menu a {color: white; margin: 0 0.4em;}
 #menu a:hover {color: black;}
 
@@ -94,3 +96,6 @@ form, .box { margin: 1em 0; padding: 0.8em 1em; border: 6px solid #FFFFFF; backg
     #header, #footer, #menu {display: none;}
     .details {padding: 0.8em 0em;}
 }
+
+#language-switcher {float: right; }
+#language-switcher li {display: inline;}

@@ -1,8 +1,19 @@
 {% load i18n %}
+{% load localeurl_tags %}
 
 <div id="header">
     <p class="logo">BILLOUT</p>
     <p class="slogan"><span class="quote">&#8220;</span>{% trans "Fit bills with real time" %}<span class="quote">&#8221;</span></p>
+</div>
+
+<div id="language-switcher">
+{% for lang in LANGUAGES %}
+    {% ifequal lang.0 LANGUAGE_CODE %}
+        <li class="selected"><img src="{{ STATIC_URL }}billout/img/{{ lang.0 }}.png" alt="{{ lang.1 }}" /></li>
+    {% else %}
+        <li><a href="{{ request.path|chlocale:lang.0 }}" title="{{ lang.1 }}"><img src="{{ STATIC_URL }}billout/img/{{ lang.0 }}.png" alt="{{ lang.1 }}" /></a></li>
+    {% endifequal %}
+{% endfor %}
 </div>
 
 <div class="visualClear"></div>

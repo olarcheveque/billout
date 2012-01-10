@@ -1,0 +1,251 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-10 00:30-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+
+#: admin.py:33
+msgid "Charged"
+msgstr "Facturé"
+
+#: admin.py:43
+msgid "Bill sent"
+msgstr "Facture envoyée"
+
+#: admin.py:57 templates/billout/bill.html:51
+#: templates/billout/reports.html:40
+msgid "Total worked hours"
+msgstr "Total d'heures travaillées"
+
+#: admin.py:61 templates/billout/reports.html:41
+msgid "Total without taxes"
+msgstr "Total sans les taxes"
+
+#: admin.py:65 models.py:64 templates/billout/bill.html:32
+#: templates/billout/bill.html.py:59 templates/billout/reports.html:42
+msgid "TPS"
+msgstr ""
+
+#: admin.py:69 models.py:65 templates/billout/bill.html:33
+#: templates/billout/bill.html.py:63 templates/billout/reports.html:43
+msgid "TVQ"
+msgstr ""
+
+#: admin.py:73 templates/billout/reports.html:44
+msgid "Total with taxes"
+msgstr "Total avec les taxes"
+
+#: models.py:12 models.py:24 models.py:82 templates/billout/bills.html:40
+msgid "Customer"
+msgstr "Client"
+
+#: models.py:13 models.py:44 models.py:169 models.py:178
+msgid "Name"
+msgstr "Nom"
+
+#: models.py:16 models.py:26 templates/billout/bill.html:27
+msgid "Project"
+msgstr "Projet"
+
+#: models.py:17
+msgid "Projects"
+msgstr "Projets"
+
+#: models.py:25 models.py:81 templates/billout/bill.html:18
+#: templates/billout/bill.html.py:28 templates/billout/bills.html:41
+msgid "Date"
+msgstr "Date"
+
+#: models.py:27
+msgid "Hours"
+msgstr "Heures"
+
+#: models.py:28 templates/billout/bill.html:30
+msgid "Comment"
+msgstr "Commentaire"
+
+#: models.py:32 models.py:62
+msgid "Activity"
+msgstr "Activité"
+
+#: models.py:33
+msgid "Activities"
+msgstr "Activités"
+
+#: models.py:45
+msgid "Hour price"
+msgstr "Prix de l'heure"
+
+#: models.py:48 models.py:63
+msgid "Rate"
+msgstr "Taux"
+
+#: models.py:49
+msgid "Rates"
+msgstr "Taux"
+
+#: models.py:61 models.py:87
+msgid "Bill"
+msgstr "Facture"
+
+#: models.py:68
+msgid "Item"
+msgstr "Item"
+
+#: models.py:69
+msgid "Items"
+msgstr "Items"
+
+#: models.py:77
+msgid "Draft"
+msgstr "Brouillon"
+
+#: models.py:78
+msgid "Published"
+msgstr "Publié"
+
+#: models.py:83
+msgid "Payed"
+msgstr "Payé"
+
+#: models.py:84
+msgid "State"
+msgstr "État"
+
+#: models.py:88 templates/billout/bills.html:35
+msgid "Bills"
+msgstr "Factures"
+
+#: models.py:111
+msgid "There is no TPS rate for year "
+msgstr "Il n'y a pas de taux de TPS pour l'année "
+
+#: models.py:117
+msgid "There is no TVQ rate for year "
+msgstr "Il n'y a pas de taux de TVQ pour l'année "
+
+#: models.py:152
+msgid "No email set for customer"
+msgstr "Pas de courriel connu pour ce client"
+
+#: models.py:163
+msgid "Setting key is not defined"
+msgstr "La variable de configuration n'est pas définie"
+
+#: models.py:168
+msgid "Key"
+msgstr "Variable"
+
+#: models.py:170 models.py:179
+msgid "Value"
+msgstr "Valeur"
+
+#: models.py:173
+msgid "Setting"
+msgstr "Configuration"
+
+#: models.py:174
+msgid "Settings"
+msgstr "Configuration"
+
+#: models.py:180 templates/billout/reports.html:39
+msgid "Year"
+msgstr "Année"
+
+#: models.py:183
+msgid "Tax"
+msgstr "Taxe"
+
+#: models.py:184
+msgid "Taxes"
+msgstr "Taxes"
+
+#: views.py:92
+msgid "Don't try to spy please."
+msgstr "N'espionnez pas merci."
+
+#: templates/billout/bill.html:16
+msgid "bill"
+msgstr "facture"
+
+#: templates/billout/bill.html:19
+msgid "#TPS"
+msgstr "#TPS"
+
+#: templates/billout/bill.html:20
+msgid "#TVQ"
+msgstr "#TVQ"
+
+#: templates/billout/bill.html:21
+msgid "Payment infos"
+msgstr "Informations pour paiement"
+
+#: templates/billout/bill.html:22
+msgid "Address"
+msgstr "Adresse"
+
+#: templates/billout/bill.html:29
+msgid "Hours (H)"
+msgstr "Heures (H)"
+
+#: templates/billout/bill.html:31
+msgid "Rate ($/H)"
+msgstr "Taux ($/H)"
+
+#: templates/billout/bill.html:55 templates/billout/bills.html:43
+msgid "Total"
+msgstr "Total"
+
+#: templates/billout/bill.html:67
+msgid "Total taxes included"
+msgstr "Total avec les taxes"
+
+#: templates/billout/bills.html:23 templates/billout/reports.html:23
+msgid "Change customer"
+msgstr "Changer de client"
+
+#: templates/billout/bills.html:42
+msgid "Worked hours"
+msgstr "Heures travaillées"
+
+#: templates/billout/bills.html:44
+msgid "Payed?"
+msgstr "Payé?"
+
+#: templates/billout/bills.html:62
+msgid "Amount due"
+msgstr "Montant dû"
+
+#: templates/billout/menu.html:5
+msgid "My bills"
+msgstr "Mes factures"
+
+#: templates/billout/menu.html:6
+msgid "My Reports"
+msgstr "Mes rapports"
+
+#: templates/billout/menu.html:7
+msgid "Logout"
+msgstr "Déconnexion"
+
+#: templates/billout/reports.html:35
+msgid "Reports"
+msgstr "Rapports"
+
+#: templates/skin/header.html:6
+msgid "Fit bills with real time"
+msgstr "Une facture qui reflète la réalité"

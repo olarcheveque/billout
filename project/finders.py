@@ -1,5 +1,5 @@
-from staticfiles.finders import AppDirectoriesFinder
-from staticfiles.storage import AppStaticStorage
+from django.contrib.staticfiles.finders import AppDirectoriesFinder
+from django.contrib.staticfiles.storage import AppStaticStorage
 
 class LegacyAppStaticStorage(AppStaticStorage):
     source_dir = 'media'

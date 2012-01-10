@@ -47,7 +47,7 @@
         <tr>
             <td><a href="{% url bill bill.id %}">{{ bill.id}}</a></td>
             <td>{{ bill.customer }}</td>
-            <td>{{ bill.date }}</td>
+            <td>{{ bill.date|date:"SHORT_DATE_FORMAT" }}</td>
             <td class="number">{{ bill.total_worked_hours }}</td>
             <td class="number">{{ bill.total_with_taxes }}$</td>
             <td class="number">{% if bill.payed %}✓{% endif %}</td>

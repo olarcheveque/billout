@@ -12,13 +12,19 @@ MANAGERS = ADMINS
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Montreal'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr-ca'
 
-DATE_FORMAT = 'Y-m-d'
+_ = lambda s: s
+LANGUAGES = (
+    ('fr', _(u'Français')),
+    ('en', _(u'English')),
+)
+
+#DATE_FORMAT = 'Y-m-d'
 
 SITE_ID = 1
 
@@ -28,17 +34,7 @@ USE_I18N = True
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
-USE_L10N = False
-
-# for static media aggregation
-STATICFILES_FINDERS = (
-    'staticfiles.finders.FileSystemFinder',
-    'staticfiles.finders.AppDirectoriesFinder',
-    'project.finders.AppMediaFinder',
-)
-STATICFILES_STORAGE = 'staticfiles.storage.StaticFilesStorage'
-STATIC_ROOT = 'static'
-STATIC_URL = '/static/'
+USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/"
@@ -48,6 +44,15 @@ MEDIA_ROOT = ''
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = ''
+
+STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'project.finders.AppMediaFinder',
+)
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -62,6 +67,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'localeurl.middleware.LocaleURLMiddleware',
     'project.middleware.SecureRequiredMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -78,20 +84,23 @@ TEMPLATE_DIRS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.auth',
+    'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
-    'django.contrib.messages.context_processors.messages', # Django 1.2
+    'django.core.context_processors.static',
+    'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
 )
 
 INSTALLED_APPS = (
+    'localeurl',
     'raven.contrib.django',
     'admin_tools',
     'admin_tools.theming',
     'admin_tools.menu',
     'admin_tools.dashboard',
+    'django.contrib.staticfiles',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -99,9 +108,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'south',
-    'staticfiles',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
     'billout',
     'usinskin',
     'django_vu.client',
