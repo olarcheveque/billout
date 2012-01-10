@@ -43,7 +43,7 @@
             <th class="column-header">{% trans "TVQ" %}</th>
             <th class="column-header">{% trans "Total with taxes" %}</th>
         </tr>
-    {% for year, report in annual_reports.items %}
+    {% for year, report in annual_reports %}
         <tr>
             <td>{{ year }}</td>
             <td class="number">{{ report.hours }}</td>

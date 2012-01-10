@@ -35,24 +35,27 @@ def _get_context_qs_vars(request, username=None):
 @login_required
 def reports(request, username=None):
     customers, customer, q = _get_context_qs_vars(request, username)
-    bills = Bill.objects.filter(q).order_by('-date')
+    bills = Bill.objects.filter(q)
 
     annual_reports = {}
 
     for bill in bills:
-        if not annual_reports.has_key(bill.date.year):
-            annual_reports[bill.date.year] = {
+        year = int(bill.date.year)
+        if not annual_reports.has_key(year):
+            annual_reports[year] = {
                 'hours' : 0.0,
                 'tps' : 0.0,
                 'tvq' : 0.0,
                 'total_without_taxes' :  0.0,
                 'total_with_taxes' :  0.0,
             }
-        annual_reports[bill.date.year]['hours'] += bill.total_worked_hours()
-        annual_reports[bill.date.year]['tps'] += bill.total_tps()
-        annual_reports[bill.date.year]['tvq'] += bill.total_tvq()
-        annual_reports[bill.date.year]['total_without_taxes'] += bill.total_without_taxes()
-        annual_reports[bill.date.year]['total_with_taxes'] += bill.total_with_taxes()
+        annual_reports[year]['hours'] += bill.total_worked_hours()
+        annual_reports[year]['tps'] += bill.total_tps()
+        annual_reports[year]['tvq'] += bill.total_tvq()
+        annual_reports[year]['total_without_taxes'] += bill.total_without_taxes()
+        annual_reports[year]['total_with_taxes'] += bill.total_with_taxes()
+    
+    annual_reports = sorted(annual_reports.iteritems(), reverse=True)
 
     c = {
         'annual_reports' : annual_reports,
