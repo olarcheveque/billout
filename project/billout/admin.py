@@ -2,6 +2,7 @@
 
 from django.utils.translation import ugettext as _
 from django.forms.models import BaseInlineFormSet
+from django.template.defaultfilters import linebreaks
 from django.contrib import admin, messages
 from models import *
 
@@ -39,17 +40,40 @@ def mail_bill(modeladmin, request, queryset):
     selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
     for bill in Bill.objects.filter(id__in=selected):
         try:
-            bill.mail()
+            bill.mail_first()
             messages.add_message(request, messages.SUCCESS, _("Bill sent"))
         except Exception, e:
             messages.add_message(request, messages.ERROR, e)
+mail_bill.short_description = _("Mail bill")
+
+def mail_reminder(modeladmin, request, queryset):
+    selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+    for bill in Bill.objects.filter(id__in=selected):
+        try:
+            bill.mail_reminder()
+            messages.add_message(request, messages.SUCCESS, _("Reminder sent"))
+        except Exception, e:
+            messages.add_message(request, messages.ERROR, e)
+mail_reminder.short_description = _("Mail reminder")
 
 
 class BillAdmin(admin.ModelAdmin):
     list_editable = ('state', 'payed', )
-    list_display = ('id', 'date', 'customer', 'total_worked_hours', '_total_without_taxes', '_total_tps', '_total_tvq', '_total_with_taxes', 'state', 'payed', )
+    list_display = (
+        'id',
+        'date',
+        'customer',
+        'total_worked_hours',
+        '_total_without_taxes',
+        '_total_tps',
+        '_total_tvq',
+        '_total_with_taxes',
+        'state',
+        'payed',
+        '_time_left',
+    )
     list_filter = ('customer', 'date', )
-    actions = [mail_bill, ]
+    actions = [mail_bill, mail_reminder]
     inlines = (ItemInline, )
 
     def _total_worked_hours(self, obj):
@@ -72,10 +96,28 @@ class BillAdmin(admin.ModelAdmin):
         return obj.total_with_taxes()
     _total_with_taxes.short_description = _('Total with taxes')
 
+    def _time_left(self, obj):
+        counter = obj.get_time_left()
+        if counter is None:
+            return ""
+        else:
+            if counter >= 0:
+                return counter
+            else:
+                return "<span style='color: red;'>%s</span>" % counter
+    _time_left.short_description = _('Time left (over) days')
+    _time_left.allow_tags = True
+
 
 class SettingAdmin(admin.ModelAdmin):
-    list_display = ('key', 'name', 'value', )
+    list_display = ('key', 'name', '_value', )
     fields = ('key', 'name', 'value', )
+
+    def _value(self, obj):
+        return linebreaks(obj.value)
+
+    _value.short_description = _("Value")
+    _value.allow_tags = True
 
 class TaxAdmin(admin.ModelAdmin):
     list_display = ('name', 'year', 'value', )

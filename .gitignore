@@ -16,4 +16,4 @@ eggs
 log
 parts
 tmp
-./static
+static

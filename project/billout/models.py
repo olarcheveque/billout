@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 
+import datetime
 from django.core.mail import send_mail
 from django.utils.translation import ugettext as _
 from django.template import Context, Template
@@ -7,6 +8,7 @@ from django.db import models
 
 CANADA_CODE = 'CA'
 QUEBEC_CODE = 'QC'
+
 
 class Project(models.Model):
     customer = models.ForeignKey('auth.User', verbose_name=_('Customer'))
@@ -137,14 +139,35 @@ class Bill(models.Model):
     def total_with_taxes(self):
         return self.total_without_taxes() + self.total_tps() + self.total_tvq()
 
-    def mail(self):
+    def get_time_left(self):
+        if self.state == BILL_PUBLISHED and self.payed is False:
+            BILL_DUE = Setting.objects.val("BILL_DUE")
+            delta = datetime.date.today() - self.date
+            counter = int(BILL_DUE) - delta.days
+            return counter
+        else:
+            return None
+
+    def get_time_over(self):
+        counter = self.get_time_left()
+        if counter is None:
+            return None
+        else:
+            return -counter
+
+    def _mail(self, template):
         company = Setting.objects.val("COMPANY_NAME")
         subject = Setting.objects.val("BILL_SUBJECT") % (company, self.id)
         sender = Setting.objects.val("BILL_SENDER")
-        mail_content = Setting.objects.val("BILL_MAIL_CONTENT")
-        t = Template(mail_content)
+
+        settings = {}
+        for s in Setting.objects.all():
+            settings[s.key] = s.value
+
+        t = Template(template)
         c = Context({
             "bill": self,
+            "settings": settings,
         })
         message = t.render(c)
         email = self.customer.email
@@ -153,6 +176,14 @@ class Bill(models.Model):
         copies = [c.strip() for c in Setting.objects.val("BILL_MAIL_COPIES").split(',')]
         to = [email,] + copies
         send_mail(subject, message, sender, to, fail_silently=False)
+
+    def mail_first(self):
+        template = Setting.objects.val("BILL_MAIL_CONTENT")
+        self._mail(template)
+
+    def mail_reminder(self):
+        template = Setting.objects.val("BILL_MAIL_REMINDER")
+        self._mail(template)
 
 
 class SettingManager(models.Manager):
@@ -173,6 +204,8 @@ class Setting(models.Model):
         verbose_name = _('Setting')
         verbose_name_plural = _('Settings')
 
+    def __unicode__(self):
+        return self.key
 
 class Tax(models.Model):
     name = models.CharField(max_length=255, verbose_name=_('Name'))

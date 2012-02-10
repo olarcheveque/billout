@@ -1,83 +1,101 @@
 [
     {
-        "pk": 1, 
-        "model": "billout.setting", 
+        "pk": 1,
+        "model": "billout.setting",
         "fields": {
-            "value": "USINASITE", 
-            "name": "COMPANY_NAME", 
+            "value": "USINASITE",
+            "name": "COMPANY_NAME",
             "key": "COMPANY_NAME"
         }
-    }, 
+    },
     {
-        "pk": 2, 
-        "model": "billout.setting", 
+        "pk": 2,
+        "model": "billout.setting",
         "fields": {
-            "value": "%s : Facture / Bill #%s", 
-            "name": "BILL_SUBJECT", 
+            "value": "%s : Facture / Bill #%s",
+            "name": "BILL_SUBJECT",
             "key": "BILL_SUBJECT"
         }
-    }, 
+    },
     {
-        "pk": 3, 
-        "model": "billout.setting", 
+        "pk": 3,
+        "model": "billout.setting",
         "fields": {
-            "value": "olivier.larcheveque@gmail.com", 
-            "name": "BILL_SENDER", 
+            "value": "olivier.larcheveque@gmail.com",
+            "name": "BILL_SENDER",
             "key": "BILL_SENDER"
         }
-    }, 
+    },
     {
-        "pk": 4, 
-        "model": "billout.setting", 
+        "pk": 4,
+        "model": "billout.setting",
         "fields": {
-            "value": "{% load i18n %}\r\n\r\nCompte client : {{ bill.customer.username }}\r\nNum\u00e9ro de facture : #{{ bill.id }}\r\n\r\nCher client,\r\n\r\nVous trouverez votre facture \u00e0 cette adresse :\r\n\r\nhttps://billout.usinasite.com/bill/{{ bill.id }}\r\n\r\nN'h\u00e9sitez pas \u00e0 communiquer avec nous pour toutes informations suppl\u00e9mentaires via courrier \u00e9lectronique \u00e0: olivier.larcheveque@gmail.com\r\n\r\n\r\nVous pouvez retrouver vos anciennes factures ici :\r\n\r\nhttps://billout.usinasite.com\r\n\r\nMerci.\r\n\r\n=================================================================\r\n\r\nCustomer account : {{ bill.customer.username }}\r\nBill number : #{{ bill.id }}\r\n\r\nDear customer,\r\n\r\nYou can find your bill here :\r\n\r\nhttps://billout.usinasite.com/bill/{{ bill.id }}\r\n\r\nIf you have any questions, please send us an email to : olivier.larcheveque@gmail.com\r\n\r\n\r\nYou cant find your past bills here :\r\n\r\nhttps://billout.usinasite.com\r\n\r\nThank you.\r\n", 
-            "name": "BILL_MAIL_CONTENT", 
+            "value": "** Nouveau ** : vous pouvez maintenant consulter les montants par ann\u00e9e pour vos rapports d'imp\u00f4ts  (https://billout.usinasite.com/reports).\r\n\r\nCompte client : {{ bill.customer.username }}\r\nNum\u00e9ro de facture : #{{ bill.id }}\r\n\r\nCher client,\r\n\r\nVous trouverez votre facture \u00e0 cette adresse :\r\n\r\nhttps://billout.usinasite.com/bill/{{ bill.id }}\r\n\r\nVous avez {{ settings.BILL_DUE }} jours pour nous faire parvenir votre paiement.\r\n\r\nN'h\u00e9sitez pas \u00e0 communiquer avec nous pour toutes informations suppl\u00e9mentaires via courrier \u00e9lectronique \u00e0: olivier.larcheveque@gmail.com\r\n\r\n\r\nVous pouvez retrouver vos anciennes factures ici :\r\n\r\nhttps://billout.usinasite.com\r\n\r\nMerci.\r\n\r\n\r\n-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\r\n\r\n\r\n** New ** : you can now view charged amount per year for your tax report (https://billout.usinasite.com/reports).\r\n\r\nCustomer account : {{ bill.customer.username }}\r\nBill number : #{{ bill.id }}\r\n\r\nDear customer,\r\n\r\nYou can find your bill here :\r\n\r\nhttps://billout.usinasite.com/bill/{{ bill.id }}\r\n\r\nYou have {{ settings.BILL_DUE }} days to send us your payment.\r\n\r\nIf you have any questions, please send us an email to : olivier.larcheveque@gmail.com\r\n\r\n\r\nYou cant find your past bills here :\r\n\r\nhttps://billout.usinasite.com\r\n\r\nThank you.\r\n",
+            "name": "BILL_MAIL_CONTENT",
             "key": "BILL_MAIL_CONTENT"
         }
-    }, 
+    },
     {
-        "pk": 5, 
-        "model": "billout.setting", 
+        "pk": 5,
+        "model": "billout.setting",
         "fields": {
-            "value": "olarcheveque@gmail.com", 
-            "name": "BILL_MAIL_COPIES", 
+            "value": "olivier.larcheveque@gmail.com",
+            "name": "BILL_MAIL_COPIES",
             "key": "BILL_MAIL_COPIES"
         }
-    }, 
+    },
     {
-        "pk": 6, 
-        "model": "billout.setting", 
+        "pk": 6,
+        "model": "billout.setting",
         "fields": {
-            "value": "851200451 RT0001", 
-            "name": "TPS_NUM", 
+            "value": "851200451 RT0001",
+            "name": "TPS_NUM",
             "key": "TPS_NUM"
         }
-    }, 
+    },
     {
-        "pk": 7, 
-        "model": "billout.setting", 
+        "pk": 7,
+        "model": "billout.setting",
         "fields": {
-            "value": "4006187370 TQ0001", 
-            "name": "TVQ_NUM", 
+            "value": "4006187370 TQ0001",
+            "name": "TVQ_NUM",
             "key": "TVQ_NUM"
         }
-    }, 
+    },
     {
-        "pk": 8, 
-        "model": "billout.setting", 
+        "pk": 8,
+        "model": "billout.setting",
         "fields": {
-            "value": "Paiement par ch\u00e8que \u00e0 l'ordre de Olivier Larchev\u00eaque / Check payment to  Olivier Larchev\u00eaque", 
-            "name": "PAY_INFO", 
+            "value": "Paiement par ch\u00e8que \u00e0 l'ordre de Olivier Larchev\u00eaque / Check payment to  Olivier Larchev\u00eaque",
+            "name": "PAY_INFO",
             "key": "PAY_INFO"
         }
-    }, 
+    },
     {
-        "pk": 9, 
-        "model": "billout.setting", 
+        "pk": 9,
+        "model": "billout.setting",
         "fields": {
-            "value": "Olivier Larchev\u00eaque\r\n7340 18i\u00e8me avenue #001\r\nMontr\u00e9al, QC H2A2N2\r\nCANADA", 
-            "name": "ADDRESS", 
+            "value": "Olivier Larchev\u00eaque\r\n7340 18i\u00e8me avenue #001\r\nMontr\u00e9al, QC H2A2N2\r\nCANADA",
+            "name": "ADDRESS",
             "key": "ADDRESS"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "billout.setting",
+        "fields": {
+            "value": "30",
+            "name": "BILL_DUE",
+            "key": "BILL_DUE"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "billout.setting",
+        "fields": {
+            "value": "RAPPEL\r\n\r\nCompte client : {{ bill.customer.username }}\r\nNum\u00e9ro de facture : #{{ bill.id }}\r\n\r\nCher client,\r\n\r\nNous n'avons pas encore re\u00e7u votre paiement correspondant \u00e0 la facture #{{ bill.id }} ({{ bill.get_time_over }} jours de retard).\r\nSi votre paiement vient d'\u00eatre envoy\u00e9, ne tenez pas compte de ce message.\r\n\r\nVous trouverez votre facture \u00e0 cette adresse :\r\n\r\nhttps://billout.usinasite.com/bill/{{ bill.id }}\r\n\r\nN'h\u00e9sitez pas \u00e0 communiquer avec nous pour toutes informations suppl\u00e9mentaires via courrier \u00e9lectronique \u00e0: olivier.larcheveque@gmail.com\r\n\r\n\r\nVous pouvez retrouver vos anciennes factures ici :\r\n\r\nhttps://billout.usinasite.com\r\n\r\nMerci.\r\n\r\n\r\n-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\r\n\r\n\r\nREMINDER\r\n\r\nCustomer account : {{ bill.customer.username }}\r\nBill number : #{{ bill.id }}\r\n\r\nDear customer,\r\n\r\nWe have not yet received you payment for bill #{{ bill.id }} ({{ bill.get_time_left }}) days late).\r\nIf you have already sent it, please ignore this message.\r\n\r\nYou can find your bill here :\r\n\r\nhttps://billout.usinasite.com/bill/{{ bill.id }}\r\n\r\nIf you have any questions, please send us an email to : olivier.larcheveque@gmail.com\r\n\r\n\r\nYou cant find your past bills here :\r\n\r\nhttps://billout.usinasite.com\r\n\r\nThank you.\r\n",
+            "name": "BILL_MAIL_REMINDER",
+            "key": "BILL_MAIL_REMINDER"
         }
     }
 ]
