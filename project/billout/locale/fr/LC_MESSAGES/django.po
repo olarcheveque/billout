@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-10 00:30-0500\n"
+"POT-Creation-Date: 2012-02-12 23:58-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,159 +18,175 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: admin.py:33
+#: admin.py:34
 msgid "Charged"
 msgstr "Facturé"
 
-#: admin.py:43
+#: admin.py:44
 msgid "Bill sent"
 msgstr "Facture envoyée"
 
-#: admin.py:57 templates/billout/bill.html:51
+#: admin.py:47
+msgid "Mail bill"
+msgstr "Envoyer la facture"
+
+#: admin.py:54
+msgid "Reminder sent"
+msgstr "Rappel envoyé"
+
+#: admin.py:57
+msgid "Mail reminder"
+msgstr "Envoyer un rappel"
+
+#: admin.py:81 templates/billout/bill.html:51
 #: templates/billout/reports.html:40
 msgid "Total worked hours"
 msgstr "Total d'heures travaillées"
 
-#: admin.py:61 templates/billout/reports.html:41
+#: admin.py:85 templates/billout/reports.html:41
 msgid "Total without taxes"
 msgstr "Total sans les taxes"
 
-#: admin.py:65 models.py:64 templates/billout/bill.html:32
+#: admin.py:89 models.py:66 templates/billout/bill.html:32
 #: templates/billout/bill.html.py:59 templates/billout/reports.html:42
 msgid "TPS"
 msgstr ""
 
-#: admin.py:69 models.py:65 templates/billout/bill.html:33
+#: admin.py:93 models.py:67 templates/billout/bill.html:33
 #: templates/billout/bill.html.py:63 templates/billout/reports.html:43
 msgid "TVQ"
 msgstr ""
 
-#: admin.py:73 templates/billout/reports.html:44
+#: admin.py:97 templates/billout/reports.html:44
 msgid "Total with taxes"
 msgstr "Total avec les taxes"
 
-#: models.py:12 models.py:24 models.py:82 templates/billout/bills.html:40
+#: admin.py:108
+msgid "Time left (over) days"
+msgstr ""
+
+#: admin.py:119 models.py:201 models.py:212
+msgid "Value"
+msgstr "Valeur"
+
+#: models.py:14 models.py:26 models.py:84 templates/billout/bills.html:40
 msgid "Customer"
 msgstr "Client"
 
-#: models.py:13 models.py:44 models.py:169 models.py:178
+#: models.py:15 models.py:46 models.py:200 models.py:211
 msgid "Name"
 msgstr "Nom"
 
-#: models.py:16 models.py:26 templates/billout/bill.html:27
+#: models.py:18 models.py:28 templates/billout/bill.html:27
 msgid "Project"
 msgstr "Projet"
 
-#: models.py:17
+#: models.py:19
 msgid "Projects"
 msgstr "Projets"
 
-#: models.py:25 models.py:81 templates/billout/bill.html:18
+#: models.py:27 models.py:83 templates/billout/bill.html:18
 #: templates/billout/bill.html.py:28 templates/billout/bills.html:41
 msgid "Date"
 msgstr "Date"
 
-#: models.py:27
+#: models.py:29
 msgid "Hours"
 msgstr "Heures"
 
-#: models.py:28 templates/billout/bill.html:30
+#: models.py:30 templates/billout/bill.html:30
 msgid "Comment"
 msgstr "Commentaire"
 
-#: models.py:32 models.py:62
+#: models.py:34 models.py:64
 msgid "Activity"
 msgstr "Activité"
 
-#: models.py:33
+#: models.py:35
 msgid "Activities"
 msgstr "Activités"
 
-#: models.py:45
+#: models.py:47
 msgid "Hour price"
 msgstr "Prix de l'heure"
 
-#: models.py:48 models.py:63
+#: models.py:50 models.py:65
 msgid "Rate"
 msgstr "Taux"
 
-#: models.py:49
+#: models.py:51
 msgid "Rates"
 msgstr "Taux"
 
-#: models.py:61 models.py:87
+#: models.py:63 models.py:89
 msgid "Bill"
 msgstr "Facture"
 
-#: models.py:68
+#: models.py:70
 msgid "Item"
 msgstr "Item"
 
-#: models.py:69
+#: models.py:71
 msgid "Items"
 msgstr "Items"
 
-#: models.py:77
+#: models.py:79
 msgid "Draft"
 msgstr "Brouillon"
 
-#: models.py:78
+#: models.py:80
 msgid "Published"
 msgstr "Publié"
 
-#: models.py:83
+#: models.py:85
 msgid "Payed"
 msgstr "Payé"
 
-#: models.py:84
+#: models.py:86
 msgid "State"
 msgstr "État"
 
-#: models.py:88 templates/billout/bills.html:35
+#: models.py:90 templates/billout/bills.html:35
 msgid "Bills"
 msgstr "Factures"
 
-#: models.py:111
+#: models.py:113
 msgid "There is no TPS rate for year "
 msgstr "Il n'y a pas de taux de TPS pour l'année "
 
-#: models.py:117
+#: models.py:119
 msgid "There is no TVQ rate for year "
 msgstr "Il n'y a pas de taux de TVQ pour l'année "
 
-#: models.py:152
+#: models.py:175
 msgid "No email set for customer"
 msgstr "Pas de courriel connu pour ce client"
 
-#: models.py:163
+#: models.py:194
 msgid "Setting key is not defined"
 msgstr "La variable de configuration n'est pas définie"
 
-#: models.py:168
+#: models.py:199
 msgid "Key"
 msgstr "Variable"
 
-#: models.py:170 models.py:179
-msgid "Value"
-msgstr "Valeur"
-
-#: models.py:173
+#: models.py:204
 msgid "Setting"
 msgstr "Configuration"
 
-#: models.py:174
+#: models.py:205
 msgid "Settings"
 msgstr "Configuration"
 
-#: models.py:180 templates/billout/reports.html:39
+#: models.py:213 templates/billout/reports.html:39
 msgid "Year"
 msgstr "Année"
 
-#: models.py:183
+#: models.py:216
 msgid "Tax"
 msgstr "Taxe"
 
-#: models.py:184
+#: models.py:217
 msgid "Taxes"
 msgstr "Taxes"
 
