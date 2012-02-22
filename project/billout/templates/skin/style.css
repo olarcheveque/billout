@@ -65,7 +65,7 @@ form {float: left; display: block; }
 /* table */
 td, th {font-size: 80%; padding: 0.6em 1em; text-align: right;}
 th {font-weight: bold;}
-.column-header { border-bottom: 1px solid; black;}
+.column-header { border-bottom: 1px solid black;}
 table.rotated td {text-align: left;}
 input[type="submit"] {border: 1px solid #ffffff; background: #eeeeee; color: #B18904; float: right; margin: 0.6em 1em;}
 
@@ -83,7 +83,7 @@ form, .box { margin: 0.6em 0; padding: 0.8em 1em; border: 6px solid #FFFFFF; bac
 
 #footer .author {padding-top: 1em; font-size: 0.8em;}
 
-#menu {background-color: #B18904; padding: 0.4em; 1em; margin: 0.4em 0 1em;}
+#menu {background-color: #B18904; padding: 0.4em 1em; margin: 0.4em 0 1em;}
 #menu a {color: white; margin: 0 0.4em;}
 #menu a:hover {color: black;}
 

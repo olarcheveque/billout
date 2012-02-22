@@ -119,6 +119,7 @@ ADMIN_TOOLS_INDEX_DASHBOARD = 'project.dashboard.CustomIndexDashboard'
 SENTRY_SERVERS = ['http://sentry.usinasite.com/store/', ]
 MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
   'raven.contrib.django.middleware.Sentry404CatchMiddleware',
+  'project.middleware.SecureRequiredMiddleware',
 )
 
 SECURE_REQUIRED_PATHS = (
