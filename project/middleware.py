@@ -13,7 +13,6 @@ class SecureRequiredMiddleware(object):
         self.paths += extra
 
     def process_request(self, request):
-        return None
         if self.enabled and not request.is_secure():
             for path in self.paths:
                 if request.get_full_path().startswith(path):
