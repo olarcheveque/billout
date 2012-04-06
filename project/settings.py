@@ -109,6 +109,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'south',
     'billout',
+    'accounting',
     'usinskin',
     'django_vu.client',
 )
