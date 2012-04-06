@@ -42,4 +42,15 @@ class Entry(models.Model):
             verbose_name=_('Account'))
     category = models.ForeignKey('accounting.EntryCategory',
             verbose_name=_('Category'))
+    amount = models.FloatField(verbose_name=_('Amount'))
     comment = models.CharField(max_length=255, verbose_name=_('Comment'))
+
+class Budget(models.Model):
+
+    class Meta:
+        verbose_name = _('Budget')
+        verbose_name_plural = _('Budgets')
+
+    category = models.ForeignKey('accounting.EntryCategory',
+            verbose_name=_('Category'))
+    amount = models.FloatField(verbose_name=_('Amount'))
