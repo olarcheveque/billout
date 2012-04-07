@@ -8,6 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
    (r'^$', 'project.billout.views.bills'),
    (r'^', include('project.billout.urls')),
+   (r'^admin/', include('project.accounting.admin_urls')),
    url(r'^admin_tools/', include('admin_tools.urls')),
    (r'^admin/', include(admin.site.urls)),
    url(r'login/$', 'django.contrib.auth.views.login', name="login"),

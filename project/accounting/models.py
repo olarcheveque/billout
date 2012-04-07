@@ -62,6 +62,7 @@ class Entry(models.Model):
     class Meta:
         verbose_name = _('Entry')
         verbose_name_plural = _('Entries')
+        ordering = ('-date', )
 
     date = models.DateField(verbose_name=_('Date'))
     account = models.ForeignKey('accounting.Account',

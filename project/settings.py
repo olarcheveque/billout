@@ -116,6 +116,7 @@ INSTALLED_APPS = (
 
 SOUTH_TESTS_MIGRATE = False
 ADMIN_TOOLS_INDEX_DASHBOARD = 'project.dashboard.CustomIndexDashboard'
+ADMIN_TOOLS_MENU = 'project.menu.CustomMenu'
 
 SENTRY_SERVERS = ['http://sentry.usinasite.com/store/', ]
 MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
