@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 from django.contrib import admin
 from models import EntryCategory, Account, Entry, Budget
 
@@ -14,7 +15,7 @@ class AccountAdmin(admin.ModelAdmin):
 
 class EntryAdmin(admin.ModelAdmin):
     list_display = ('date', 'category', 'account', 'amount', 'comment', )
-
+    list_filter = ('date', )
 
 class BudgetAdmin(admin.ModelAdmin):
     list_display = ('category', 'amount',)

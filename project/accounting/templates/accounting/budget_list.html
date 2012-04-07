@@ -1,0 +1,69 @@
+{% extends "admin/base_site.html" %}
+{% load adminmedia admin_list i18n %}
+{% load url from future %}
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/changelists.css" />
+  {% if cl.formset %}
+    <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/forms.css" />
+  {% endif %}
+  {% if cl.formset or action_form %}
+    {% url 'admin:jsi18n' as jsi18nurl %}
+    <script type="text/javascript" src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>
+  {% endif %}
+  {{ media.css }}
+  {% if not actions_on_top and not actions_on_bottom %}
+    <style>
+      #changelist table thead th:first-child {width: inherit}
+    </style>
+  {% endif %}
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+{{ media.js }}
+{% endblock %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% block breadcrumbs %}
+  <div class="breadcrumbs">
+    <a href="../../">
+      {% trans "Home" %}
+    </a>
+     &rsaquo;
+     <a href="../">
+       {% trans "Accounting" %}
+     </a>
+    &rsaquo;
+    {% trans "Overview" %}
+  </div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <h1>{% trans "Budget" %}</h1>
+    <table id="changelist">
+      <thead>
+        <tr>
+            <th>{% trans "Category" %}</th>
+            <th>{% trans "Max" %}</th>
+            {% for h in headers %}
+            <th>{{ h }}</th>
+            {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+      {% for budget in object_list %}
+      <tr class="{% cycle 'row1' 'row2' %}">
+          <td>{{ budget.category }}</td>
+          <td>{{ budget.amount }}</td>
+          {% for amount in budget.get_diff_by_month %}
+          <td>{{ amount }}</td>
+          {% endfor %}
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock %}
