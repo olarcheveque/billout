@@ -51,7 +51,6 @@ STATIC_ROOT = 'static'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'project.finders.AppMediaFinder',
 )
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
@@ -91,6 +90,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    'project.context_processors.customers',
 )
 
 INSTALLED_APPS = (
@@ -109,8 +109,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'billout',
-    'usinskin',
     'django_vu.client',
+    'skin',
 )
 
 SOUTH_TESTS_MIGRATE = False

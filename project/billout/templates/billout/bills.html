@@ -33,35 +33,33 @@
 
 {% block main %}
 <h1>{{customer.username.title }} {% trans "Bills" %}</h1>
-<div class="box">
-    <table>
-        <tr>
-            <th class="column-header">#</th>
-            <th class="column-header">{% trans "Customer" %}</th>
-            <th class="column-header">{% trans "Date" %}</th>
-            <th class="column-header">{% trans "Worked hours" %}</th>
-            <th class="column-header">{% trans "Total" %}</th>
-            <th class="column-header">{% trans "Payed?" %}</th>
-        </tr>
-    {% for bill in bills %}
-        <tr>
-            <td><a href="{% url bill bill.id %}">{{ bill.id}}</a></td>
-            <td>{{ bill.customer }}</td>
-            <td>{{ bill.date|date:"SHORT_DATE_FORMAT" }}</td>
-            <td class="number">{{ bill.total_worked_hours }}</td>
-            <td class="number">{{ bill.total_with_taxes }}$</td>
-            <td class="number">{% if bill.payed %}✓{% endif %}</td>
-        </tr>
-    {% endfor %}
+<table class="table table-striped">
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <th>{{ balance }}$</th>
-        <th>{% trans "Amount due" %}</th
-     </tr>
-    </table>
-</div>
+        <th class="column-header">#</th>
+        <th class="column-header">{% trans "Customer" %}</th>
+        <th class="column-header">{% trans "Date" %}</th>
+        <th class="column-header">{% trans "Worked hours" %}</th>
+        <th class="column-header">{% trans "Total" %}</th>
+        <th class="column-header">{% trans "Payed?" %}</th>
+    </tr>
+{% for bill in bills %}
+    <tr>
+        <td><a href="{% url bill bill.id %}">{{ bill.id}}</a></td>
+        <td>{{ bill.customer }}</td>
+        <td>{{ bill.date|date:"SHORT_DATE_FORMAT" }}</td>
+        <td class="number">{{ bill.total_worked_hours }}</td>
+        <td class="number">{{ bill.total_with_taxes }}$</td>
+        <td class="number">{% if bill.payed %}✓{% endif %}</td>
+    </tr>
+{% endfor %}
+<tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <th>{{ balance }}$</th>
+    <th>{% trans "Amount due" %}</th
+ </tr>
+</table>
 
 {% endblock main %}

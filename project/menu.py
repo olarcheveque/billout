@@ -20,9 +20,6 @@ class CustomMenu(Menu):
         Menu.__init__(self, **kwargs)
         self.children += [
             items.MenuItem(_('Dashboard'), reverse('admin:index')),
-            items.MenuItem(_('Budget'), reverse('budget')),
-            items.MenuItem(_('Journal'),
-                reverse('admin:accounting_entry_changelist')),
             items.Bookmarks(),
             items.AppList(
                 _('Applications'),

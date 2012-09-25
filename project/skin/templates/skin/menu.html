@@ -1,0 +1,28 @@
+{% load i18n %}
+
+<div class="nav-collapse collapse">
+    <ul class="nav">
+        {% if user.is_authenticated %}
+            <li><a href="#">{{ user.username }}</a></li>
+            {% if user.is_superuser %}
+            <li class="dropdown">
+                <a class="dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#">{% trans "Customer" %}
+                        <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    {% for c in customers %}
+                        <li><a href="{% url bills c.username %}">
+                            {{ c.username }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endif %}
+
+            <li><a href="{% url bills %}">{% trans "Bills" %}</a></li>
+            <li><a href="{% url reports %}">{% trans "Reports" %}</a></li>
+            <li><a href="{% url django.contrib.auth.views.logout %}">{% trans "Logout" %}</a></li>
+      {% endif %}
+  </ul>
+</div><!--/.nav-collapse -->

@@ -33,27 +33,25 @@
 
 {% block main %}
 <h1>{{customer.username.title }} {% trans "Reports" %}</h1>
-<div class="box">
-    <table>
-        <tr>
-            <th class="column-header">{% trans "Year" %}</th>
-            <th class="column-header">{% trans "Total worked hours" %}</th>
-            <th class="column-header">{% trans "Total without taxes" %}</th>
-            <th class="column-header">{% trans "TPS" %}</th>
-            <th class="column-header">{% trans "TVQ" %}</th>
-            <th class="column-header">{% trans "Total with taxes" %}</th>
-        </tr>
-    {% for year, report in annual_reports %}
-        <tr>
-            <td>{{ year }}</td>
-            <td class="number">{{ report.hours }}</td>
-            <td class="number">{{ report.total_without_taxes }}$</td>
-            <td class="number">{{ report.tps }}$</td>
-            <td class="number">{{ report.tvq }}$</td>
-            <td class="number">{{ report.total_with_taxes }}$</td>
-        </tr>
-    {% endfor %}
-    </table>
-</div>
+<table class="table table-striped">
+    <tr>
+        <th class="column-header">{% trans "Year" %}</th>
+        <th class="column-header">{% trans "Total worked hours" %}</th>
+        <th class="column-header">{% trans "Total without taxes" %}</th>
+        <th class="column-header">{% trans "TPS" %}</th>
+        <th class="column-header">{% trans "TVQ" %}</th>
+        <th class="column-header">{% trans "Total with taxes" %}</th>
+    </tr>
+{% for year, report in annual_reports %}
+    <tr>
+        <td>{{ year }}</td>
+        <td class="number">{{ report.hours }}</td>
+        <td class="number">{{ report.total_without_taxes }}$</td>
+        <td class="number">{{ report.tps }}$</td>
+        <td class="number">{{ report.tvq }}$</td>
+        <td class="number">{{ report.total_with_taxes }}$</td>
+    </tr>
+{% endfor %}
+</table>
 
 {% endblock main %}
