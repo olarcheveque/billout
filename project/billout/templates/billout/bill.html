@@ -58,7 +58,7 @@
 {% for item in items %}
     <tr>
         <td>{{ item.activity.project.name|default:"-" }}</td>
-        <td>{{ item.activity.date }}</td>
+        <td>{{ item.activity.date|date:"SHORT_DATE_FORMAT" }}</td>
         <td class="number">{{ item.activity.hours }}</td>
         <td>{{ item.activity.comment }}</td>
         <td class="number">{{ item.rate }}</td>
