@@ -127,13 +127,17 @@ class Bill(models.Model):
         return round(total, 2)
 
     def total_tvq(self):
-        tps_rate = self.get_tps_rate()
-        tvq_rate = self.get_tvq_rate()
         total = 0
-        items = [i for i in Item.objects.filter(bill=self) if i.tps]
-        for i in items:
-            base = i.activity.hours * i.rate
-            total +=  (base + base * tps_rate) * tvq_rate
+        tvq_rate = self.get_tvq_rate()
+        items = [i for i in Item.objects.filter(bill=self) if i.tvq]
+        if self.date < datetime.date(2013, 01, 01):
+            tps_rate = self.get_tps_rate()
+            for i in items:
+                base = i.activity.hours * i.rate
+                total +=  (base + base * tps_rate) * tvq_rate
+        else:
+            for i in items:
+                total += i.activity.hours * i.rate * tvq_rate
         return round(total, 2)
 
     def total_with_taxes(self):
