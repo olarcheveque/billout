@@ -81,6 +81,7 @@ BILL_STATE_CHOICES = (
 )
 class Bill(models.Model):
     date = models.DateField(verbose_name=_('Date'))
+    date_payed = models.DateTimeField(verbose_name=_('Date payed'), null=True)
     customer = models.ForeignKey('auth.User', verbose_name=_('Customer'))
     payed = models.BooleanField(verbose_name=_('Payed'), default=False)
     state = models.CharField(max_length=10, verbose_name=_('State'), choices=BILL_STATE_CHOICES)

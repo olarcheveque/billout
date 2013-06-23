@@ -1,13 +1,20 @@
 # -*- encoding: utf-8 -*-
 
+from datetime import datetime
+
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.contrib.auth.models import User as Customer
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 from django.template import Context, RequestContext
 from django.utils.translation import ugettext as _
 from django.shortcuts import render_to_response, redirect, get_object_or_404
+from django.conf import settings
+
+from django.contrib.auth.models import User as Customer
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
+import stripe
+
 from models import Bill, BILL_PUBLISHED, Setting
 
 
@@ -92,7 +99,29 @@ def bill(request, id):
         messages.add_message(request, messages.ERROR, _("Don't try to spy please."))
         return redirect(reverse('bills'))
     
+    stripe_amount = int(bill.total_with_taxes() * 100)
+
+    if request.method == 'POST':
+        stripe.api_key = settings.STRIPE_SECRET
+        token = request.POST['stripeToken']
+        try:
+            charge = stripe.Charge.create(
+                        amount=stripe_amount,
+                        currency="cad",
+                        card=token,
+                        description=u"%s%s" % (settings.STRIPE_PREFIX, bill.id),
+                        )
+            bill.payed = True
+            bill.date_payed = datetime.now()
+            bill.save()
+        except stripe.CardError, e: # The card has been declined
+            pass
+        
+
     c = {
+        'STRIPE_KEY' : settings.STRIPE_KEY,
+        'STRIPE_AMOUNT' : stripe_amount,
+        'STRIPE_DESC' : u"%s #%s" % (_("Bill"), bill.id ),
         'TPS_NUM' : Setting.objects.val("TPS_NUM"),
         'TVQ_NUM' : Setting.objects.val("TVQ_NUM"),
         'PAY_INFO' : Setting.objects.val("PAY_INFO"),

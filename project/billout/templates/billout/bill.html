@@ -15,7 +15,9 @@
 {% block main %}
 <h1>[{{ bill.customer.username.upper }}] {% trans "bill" %} #{{ bill.id }}</h1>
 <table class="table">
-    <tr><th>{% trans "Date" %}<th><td>{{bill.date }}</td></tr>
+    <tr><th>{% trans "Date" %}<th><td>{{bill.date }} {% if bill.payed %}
+                    <span class="payed">({% trans "Payed on" %} : {{ bill.date_payed }})</span> {% endif %}
+            </td></tr>
     <tr><th>{% trans "#TPS" %}<th><td>{{ TPS_NUM }}</td></tr>
     <tr><th>{% trans "#TVQ" %}<th><td>{{ TVQ_NUM }}</td></tr>
     <tr><th>{% trans "Payment infos" %}<th><td>{{ PAY_INFO|linebreaks }}</td></tr>
@@ -41,7 +43,20 @@
     </tr>
     <tr>
         <th>{% trans "Total taxes included" %}</th>
-        <td class="number"><strong>{{ bill.total_with_taxes }}$</strong></td>
+        <td class="number"><strong>{{ bill.total_with_taxes }}$</strong>
+        {% if not bill.payed %}
+            <form action="" method="POST">
+              <script
+                src="https://checkout.stripe.com/v2/checkout.js"
+                class="stripe-button"
+                data-key="{{ STRIPE_KEY }}"
+                data-amount="{{ STRIPE_AMOUNT }}"
+                data-name="USINASITE"
+                data-description="{{ STRIPE_DESC }}">
+              </script>
+            </form>
+        {% endif %}
+        </td>
     </tr>
 </table>
 
@@ -67,5 +82,7 @@
     </tr>
 {% endfor %}
 </table>
+
+
 
 {% endblock main %}
